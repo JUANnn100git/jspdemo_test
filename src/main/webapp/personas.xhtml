@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body> 
+
+<h:form>
+	<h:dataTable value="#{personaBean.lista}" var="per">
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="id" />
+			</f:facet>
+			<h:outputText value="#{per.id}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="nombres" />
+			</f:facet>
+			<h:outputText value="#{per.nombres}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="apellidos" />
+			</f:facet>
+			<h:outputText value="#{per.apellidos}" />
+		</h:column>
+		<h:column>
+			<h:commandLink action="persona" actionListener="#{personaBean.listarPorId(per)}" value="Actualizar" />
+		</h:column>
+		<h:column>
+			<h:commandLink action="#{personaBean.eliminar(per)}" value="Eliminar" />
+		</h:column>
+	</h:dataTable>
+	
+	<h:commandButton action="persona" actionListener="#{personaBean.limpiarControles()}" value="Agregar"/>
+	
+	<p:separator />
+	
+	<p:dataTable id="tabla" value="#{personaBean.lista}" var="per">
+		<p:column headerText="Id">
+			<p:outputLabel value="#{per.id}" />
+		</p:column>
+		<p:column headerText="Nombres">
+			<p:outputLabel value="#{per.nombres}" />
+		</p:column>
+		<p:column headerText="Apellidos">
+			<p:outputLabel value="#{per.apellidos}" />
+		</p:column>
+		<p:column>
+			<p:commandLink action="persona" actionListener="#{personaBean.listarPorId(per)}" value="Actualizar" ajax="false" />
+		</p:column>
+		<p:column>
+			<p:commandLink action="#{personaBean.eliminar(per)}" value="Eliminar" update="tabla" />
+		</p:column>
+	</p:dataTable>
+	
+	<p:commandButton action="persona" actionListener="#{personaBean.limpiarControles()}" value="Agregar" ajax="false" />	
+	
+</h:form> 
+
+</body> 
+</html>

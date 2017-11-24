@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body> 
+	<h:form enctype="multipart/form-data">
+		<h:panelGrid columns="2">
+			<p:outputLabel value="Id" rendered="#{personaBean.persona.id > 0}"/>
+			<p:inputText value="#{personaBean.persona.id}" required="true" rendered="#{personaBean.persona.id > 0}" />
+			
+			<p:outputLabel value="Nombre" />
+			<p:inputText value="#{personaBean.persona.nombres}" immediate="true"/>
+			
+			<p:outputLabel value="Apellidos" />
+			<p:inputText value="#{personaBean.persona.apellidos}" immediate="true"/>
+			
+			<p:fileUpload value="#{personaBean.foto}" mode="simple" skinSimple="true" label="Examinar" />
+			<p:graphicImage value="/imagen/#{personaBean.persona.id}" width="200" height="100"/>
+<!-- 			<p:fileUpload value="#{personaBean.foto}" mode="advanced" skinSimple="true" label="Examinar" uploadLabel="Subir" /> -->
+			
+			<p:commandButton action="personas" actionListener="#{personaBean.registrar()}" value="Aceptar" ajax="false" />
+<!-- 			<p:commandButton action="personas" actionListener="#{personaBean.registrar()}" value="Aceptar" /> -->
+			<p:commandButton action="personas" value="Cancelar" />
+		</h:panelGrid>
+	</h:form>
+</body> 
+</html>
+

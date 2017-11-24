@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>JSF 2.2 MitoCode Premium</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<h:inputText id="txtNombre" value="#{ejemploBean.nombre}" />
+		
+		<h:commandButton value="Saludar">
+			<f:ajax execute="txtNombre" render="txtSaludo"></f:ajax>
+		</h:commandButton>
+		
+		<h:outputText id="txtSaludo" value="Hola #{ejemploBean.nombre}" />
+		
+		<h:selectOneMenu id="cboPaises" value="#{ejemploBean.codigoPais}">
+			<f:selectItem itemLabel="--Seleccione--" itemValue="#{null}" noSelectionOption="true"/>
+			<f:selectItems value="#{ejemploBean.lstPaises}" var="pais" itemLabel="#{pais.nombre}" itemValue="#{pais.codigo}" />
+			<f:ajax envent="change" listener="#{ejemploBean.listarRegiones()}" execute="cboPaises" render="cboRegiones cboProvincias"/>
+		</h:selectOneMenu>
+		
+		<h:selectOneMenu id="cboRegiones" value="#{ejemploBean.codigoRegion}">
+			<f:selectItem itemLabel="--Seleccione--" itemValue="#{null}" noSelectionOption="true"/>
+			<f:selectItems value="#{ejemploBean.lstRegiones}" var="reg" itemLabel="#{reg.nombre}" itemValue="#{reg.codigo}" />
+			<f:ajax envent="change" listener="#{ejemploBean.listarProvincias()}" execute="cboRegiones" render="cboProvincias"/>
+		</h:selectOneMenu>
+		
+		<h:selectOneMenu id="cboProvincias" value="#{ejemploBean.codigoProvincia}">
+			<f:selectItem itemLabel="--Seleccione--" itemValue="#{null}" noSelectionOption="true"/>
+			<f:selectItems value="#{ejemploBean.lstProvincias}" var="prov" itemLabel="#{prov.nombre}" itemValue="#{prov.codigo}" />
+		</h:selectOneMenu>	
+
+	</h:form>
+</h:body>
+
+</html>
